@@ -1,2 +1,2 @@
-require './todolist_project_sinatra'
+require './todo'
 run Sinatra::Application
