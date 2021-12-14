@@ -14,10 +14,14 @@
   </header>
 
   <ul>
-    <% sort_todos(@list[:todos]) do |todo, index| %>
-      <li <%= 'class="complete"' if todo[:completed] %>>
+    <% sort_todos(@list[:todos]) do |todo| %>
+      <% if todo[:completed] %>
+        <li class="complete">
+      <% else %>
+        <li>
+      <% end %>
 
-        <form action="/lists/<%= params[:index] %>/todos/<%= index %>"
+        <form action="/lists/<%= params[:index] %>/todos/<%= todo[:id] %>"
               method="post" class="check">
           <input type="hidden" name="completed"
                  value="<%= !todo[:completed] %>" />
@@ -25,7 +29,7 @@
         </form>
 
         <h3><%= todo[:name] %></h3>
-        <form action="/lists/<%= params[:index] %>/todos/<%= index %>/delete"
+        <form action="/lists/<%= params[:index] %>/todos/<%= todo[:id] %>/delete"
               method="post" class="delete">
           <button type="submit">Delete</button>
         </form>
